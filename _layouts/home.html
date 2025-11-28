@@ -6,7 +6,20 @@ layout: default
   <div class="hero__grid">
     <div class="hero__left">
       <h1>{{ site.title }}</h1>
-      <p class="role">{{ site.role }}</p>
+      <p class="role">
+        <span class="role__item">
+          <img class="role__logo" src="{{ '/assets/icons/procore.svg'}}" alt="Procore logo">
+          <span>Product @ Procore</span>
+        </span>
+        <span class="role__item">
+          <img class="role__logo" src="{{ '/assets/icons/microsoft.svg'}}" alt="Microsoft logo">
+          <span>Ex-Microsoft</span>
+        </span>
+        <span class="role__item">
+          <img class="role__logo" src="{{ '/assets/icons/pg.svg'}}" alt="P&amp;G logo">
+          <span>Ex-P&amp;G</span>
+        </span>
+      </p>
       <p class="lede">{{ site.summary }}</p>
     </div>
     <div class="hero__right">
@@ -114,72 +127,50 @@ layout: default
   });
 </script>
 
-<section class="section-card" id="about">
+<section class="section-card" id="impact">
   <div class="section-header">
-    <h2>About</h2>
-    <p>Blending customer insight with delivery discipline to ship meaningful outcomes.</p>
+    <h2>Impact dashboard</h2>
+    <p>Key product outcomes led end-to-end.</p>
   </div>
-  <div class="grid two-col">
-    <div class="card">
-      <div class="card-title">Approach</div>
-      <p>
-        Lead with discovery, map value to metrics, and run lean experiments before scaling.
-        Partner closely with design and engineering to de-risk early and ship fast.
-      </p>
+  <div class="kpi-grid">
+    <div class="kpi-card kpi-card--hero">
+      <div class="kpi-label">Microsoft SwiftKey</div>
+      <div class="kpi-value">3x DAUs</div>
+      <p class="kpi-copy">Tripled daily active users by rebuilding onboarding and habit loops for mobile input.</p>
+      <div class="kpi-tags">
+        <span>B2C</span><span>Growth</span><span>iOS</span><span>Figma</span>
+      </div>
     </div>
-    <div class="card">
-      <div class="card-title">Focus</div>
-      <p>
-        Marketplace dynamics, onboarding flows, and retention loops. Experienced in
-        stakeholder alignment, roadmap definition, and delivery with mixed squads.
-      </p>
+    <div class="kpi-card">
+      <div class="kpi-value">+22%</div>
+      <div class="kpi-label">Week-4 retention</div>
+      <p class="kpi-copy">Lifecycle nudges and personalized shortcuts to keep new users active.</p>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-value">-28%</div>
+      <div class="kpi-label">Churn</div>
+      <p class="kpi-copy">Launched win-back sequences and relevance scoring to reduce drop-off.</p>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-value">+12 pts</div>
+      <div class="kpi-label">NPS</div>
+      <p class="kpi-copy">Shipped feedback loops, fast fixes, and in-app education for power features.</p>
     </div>
   </div>
 </section>
 
-<section class="section-card" id="projects">
+<section class="section-card" id="travel-map">
   <div class="section-header">
-    <h2>Highlighted work</h2>
-    <p>Select initiatives showing discovery-to-delivery ownership.</p>
+    <h2>Travel</h2>
+    <p>Quick view of current stops.</p>
   </div>
-  <div class="grid two-col">
-    <div class="card">
-      <div class="card-title">Conversion uplift</div>
-      <p>
-        Rebuilt onboarding flow, introducing progressive profiling and contextual nudges.
-        Result: +18% activation rate and smoother handoff to sales.
-      </p>
-      <div class="tags">
-        <span>Onboarding</span><span>Experimentation</span><span>B2B</span>
-      </div>
-    </div>
-    <div class="card">
-      <div class="card-title">Retention loop</div>
-      <p>
-        Launched milestone-based notifications and a lightweight success plan.
-        Result: +12% week-8 retention and measurable NPS lift.
-      </p>
-      <div class="tags">
-        <span>Lifecycle</span><span>Messaging</span><span>Data</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="section-card" id="skills">
-  <div class="section-header">
-    <h2>Skills</h2>
-    <p>Tools and methods applied across teams and industries.</p>
-  </div>
-  <div class="grid three-col skills">
-    <div class="pill">Discovery interviews</div>
-    <div class="pill">Journey mapping</div>
-    <div class="pill">Opportunity sizing</div>
-    <div class="pill">A/B testing</div>
-    <div class="pill">Roadmapping</div>
-    <div class="pill">Agile delivery</div>
-    <div class="pill">PRD writing</div>
-    <div class="pill">Analytics</div>
-    <div class="pill">Stakeholder alignment</div>
+  <div class="map-shell">
+    <iframe
+      class="map-frame map-frame--dark"
+      src="https://www.google.com/maps/d/embed?mid={{ site.google_custom_map_id | uri_escape }}&z=3"
+      allowfullscreen
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade">
+    </iframe>
   </div>
 </section>
