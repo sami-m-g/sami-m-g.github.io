@@ -3,16 +3,116 @@ layout: default
 ---
 
 <section class="hero">
-  <div class="hero__content">
-    <h1>{{ site.title }}</h1>
-    <p class="eyebrow">{{ site.role }}</p>
-    <p class="lede">{{ site.summary }}</p>
-    <div class="hero__cta">
-      <a class="btn btn-primary" href="#projects">View work</a>
-      <a class="btn btn-secondary" href="#about">About</a>
+  <div class="hero__grid">
+    <div class="hero__left">
+      <h1>{{ site.title }}</h1>
+      <p class="role">{{ site.role }}</p>
+      <p class="lede">{{ site.summary }}</p>
+    </div>
+    <div class="hero__right">
+      <p class="eyebrow typewriter">
+        <span class="typewriter__label">I am a</span>
+        <span class="typewriter__line">
+          <span class="typewriter__text" id="role-rotator"
+            data-phrases='[
+              "Product Manager",
+              "Software Developer",
+              "Product Designer",
+              "Product Builder"
+            ]'
+            aria-live="polite"></span>
+          <span class="typewriter__cursor" aria-hidden="true"></span>
+        </span>
+      </p>
     </div>
   </div>
 </section>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const rotator = document.getElementById("role-rotator");
+    const cursor = document.querySelector(".typewriter__cursor");
+    if (!rotator || !cursor) return;
+
+    const phrases = JSON.parse(rotator.dataset.phrases || "[]");
+    if (!phrases.length) return;
+
+    let phraseIndex = 0;
+    let charIndex = 0;
+    let currentSpan = null;
+    let textNode = null;
+    let isCurrentBuilder = false;
+    const typeDelay = 90;
+    const holdDelay = 900;
+    const cyclePause = 1200;
+    const resetFade = 550;
+    const fullCyclePause = 5000;
+
+    const startPhrase = () => {
+      const current = phrases[phraseIndex];
+      currentSpan = document.createElement("span");
+      currentSpan.className = "typewriter__segment";
+      textNode = document.createTextNode("");
+
+      isCurrentBuilder = phraseIndex === phrases.length - 1;
+      if (isCurrentBuilder) {
+        currentSpan.classList.add("typewriter__text--builder");
+        currentSpan.classList.add("typewriter__segment--glow");
+      }
+
+      rotator.appendChild(currentSpan);
+      currentSpan.appendChild(textNode);
+      currentSpan.appendChild(cursor);
+      typeNextChar(current);
+    };
+
+    const typeNextChar = (current) => {
+      if (textNode) {
+        textNode.nodeValue = current.slice(0, charIndex);
+      }
+
+      if (charIndex < current.length) {
+        charIndex += 1;
+        setTimeout(() => typeNextChar(current), typeDelay);
+        return;
+      }
+
+      setTimeout(() => {
+        if (!isCurrentBuilder) {
+          currentSpan.classList.add("typewriter__segment--faded");
+        }
+        advancePhrase();
+      }, holdDelay);
+    };
+
+    const advancePhrase = () => {
+      phraseIndex += 1;
+      charIndex = 0;
+
+      if (phraseIndex < phrases.length) {
+        startPhrase();
+        return;
+      }
+
+      setTimeout(resetCycle, fullCyclePause);
+    };
+
+    const resetCycle = () => {
+      rotator.classList.add("typewriter__text--fade");
+
+      setTimeout(() => {
+        rotator.textContent = "";
+        rotator.classList.remove("typewriter__text--fade");
+        phraseIndex = 0;
+        charIndex = 0;
+        startPhrase();
+      }, resetFade);
+    };
+
+    // Kick off
+    startPhrase();
+  });
+</script>
 
 <section class="section-card" id="about">
   <div class="section-header">
