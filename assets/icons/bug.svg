@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+  <symbol id="bug" viewBox="0 0 24 24">
+    <g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12 5a4 4 0 0 0-4 4v5a4 4 0 0 0 8 0V9a4 4 0 0 0-4-4Z" />
+      <path d="M12 3v2M7 5.5l2 1.5M17 5.5l-2 1.5M4 12h3M17 12h3M6 17l2-1.5M18 17l-2-1.5" />
+      <path d="M4 4l16 16" />
+    </g>
+  </symbol>
+</svg>

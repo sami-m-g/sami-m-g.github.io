@@ -26,14 +26,12 @@ layout: default
       <p class="eyebrow typewriter">
         <span class="typewriter__label">I am a</span>
         <span class="typewriter__line">
-          <span class="typewriter__text" id="role-rotator"
-            data-phrases='[
+          <span class="typewriter__text" id="role-rotator" data-phrases='[
               "Product Manager",
               "Software Developer",
               "Product Designer",
               "Product Builder"
-            ]'
-            aria-live="polite"></span>
+            ]' aria-live="polite"></span>
           <span class="typewriter__cursor" aria-hidden="true"></span>
         </span>
       </p>
@@ -41,119 +39,134 @@ layout: default
   </div>
 </section>
 
-<script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const rotator = document.getElementById("role-rotator");
-    const cursor = document.querySelector(".typewriter__cursor");
-    if (!rotator || !cursor) return;
 
-    const phrases = JSON.parse(rotator.dataset.phrases || "[]");
-    if (!phrases.length) return;
-
-    let phraseIndex = 0;
-    let charIndex = 0;
-    let currentSpan = null;
-    let textNode = null;
-    let isCurrentBuilder = false;
-    const typeDelay = 90;
-    const holdDelay = 900;
-    const cyclePause = 1200;
-    const resetFade = 550;
-    const fullCyclePause = 5000;
-
-    const startPhrase = () => {
-      const current = phrases[phraseIndex];
-      currentSpan = document.createElement("span");
-      currentSpan.className = "typewriter__segment";
-      textNode = document.createTextNode("");
-
-      isCurrentBuilder = phraseIndex === phrases.length - 1;
-      if (isCurrentBuilder) {
-        currentSpan.classList.add("typewriter__text--builder");
-        currentSpan.classList.add("typewriter__segment--glow");
-      }
-
-      rotator.appendChild(currentSpan);
-      currentSpan.appendChild(textNode);
-      currentSpan.appendChild(cursor);
-      typeNextChar(current);
-    };
-
-    const typeNextChar = (current) => {
-      if (textNode) {
-        textNode.nodeValue = current.slice(0, charIndex);
-      }
-
-      if (charIndex < current.length) {
-        charIndex += 1;
-        setTimeout(() => typeNextChar(current), typeDelay);
-        return;
-      }
-
-      setTimeout(() => {
-        if (!isCurrentBuilder) {
-          currentSpan.classList.add("typewriter__segment--faded");
-        }
-        advancePhrase();
-      }, holdDelay);
-    };
-
-    const advancePhrase = () => {
-      phraseIndex += 1;
-      charIndex = 0;
-
-      if (phraseIndex < phrases.length) {
-        startPhrase();
-        return;
-      }
-
-      setTimeout(resetCycle, fullCyclePause);
-    };
-
-    const resetCycle = () => {
-      rotator.classList.add("typewriter__text--fade");
-
-      setTimeout(() => {
-        rotator.textContent = "";
-        rotator.classList.remove("typewriter__text--fade");
-        phraseIndex = 0;
-        charIndex = 0;
-        startPhrase();
-      }, resetFade);
-    };
-
-    // Kick off
-    startPhrase();
-  });
-</script>
-
-<section class="section-card" id="impact">
+<section class="section-card" id="projects">
   <div class="section-header">
-    <h2>Impact</h2>
+    <h2>Projects</h2>
   </div>
   <div class="kpi-grid">
     <div class="kpi-card kpi-card--hero">
-      <div class="kpi-label">Microsoft SwiftKey</div>
-      <div class="kpi-value">3x DAUs</div>
-      <p class="kpi-copy">Tripled daily active users by rebuilding onboarding and habit loops for mobile input.</p>
+      <div class="kpi-brand">
+        <img class="kpi-brand__logo" src="{{ '/assets/icons/swiftkey.svg' }}" alt="Microsoft SwiftKey logo">
+        <span class="kpi-brand__name">Microsoft SwiftKey</span>
+      </div>
+      <div class="kpi-value-grid">
+        <div class="kpi-value-block">
+          <div class="kpi-value__top">
+            <span class="kpi-value__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" role="img" aria-hidden="true" focusable="false">
+                <use href="{{ '/assets/icons/user.svg#user' | relative_url }}"></use>
+              </svg>
+            </span>
+            <span class="kpi-value__number">x350%</span>
+          </div>
+          <div class="kpi-value__label">Daily Active Users</div>
+        </div>
+        <div class="kpi-value-block">
+          <div class="kpi-value__top">
+            <span class="kpi-value__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" role="img" aria-hidden="true" focusable="false">
+                <use href="{{ '/assets/icons/return.svg#return' | relative_url }}"></use>
+              </svg>
+            </span>
+            <span class="kpi-value__number">+5%</span>
+          </div>
+          <div class="kpi-value__label">Retention</div>
+        </div>
+        <div class="kpi-value-block">
+          <div class="kpi-value__top">
+            <span class="kpi-value__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" role="img" aria-hidden="true" focusable="false">
+                <use href="{{ '/assets/icons/bug.svg#bug' | relative_url }}"></use>
+              </svg>
+            </span>
+            <span class="kpi-value__number">+20%</span>
+          </div>
+          <div class="kpi-value__label">Crash Free</div>
+        </div>
+      </div>
       <div class="kpi-tags">
         <span>B2C</span><span>Growth</span><span>iOS</span><span>Figma</span>
       </div>
     </div>
     <div class="kpi-card">
-      <div class="kpi-value">+22%</div>
-      <div class="kpi-label">Week-4 retention</div>
-      <p class="kpi-copy">Lifecycle nudges and personalized shortcuts to keep new users active.</p>
+      <div class="kpi-brand">
+        <img class="kpi-brand__logo" src="{{ '/assets/icons/clarity.svg' }}" alt="Microsoft Clarity logo">
+        <span class="kpi-brand__name">Microsoft Clarity</span>
+      </div>
+      <div class="kpi-value-grid">
+        <div class="kpi-value-block">
+          <div class="kpi-value__top">
+            <span class="kpi-value__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" role="img" aria-hidden="true" focusable="false">
+                <use href="{{ '/assets/icons/spark.svg#spark' | relative_url }}"></use>
+              </svg>
+            </span>
+            <span class="kpi-value__number">90+%</span>
+          </div>
+          <div class="kpi-value__label">Engaged Users</div>
+        </div>
+        <div class="kpi-value-block">
+          <div class="kpi-value__top">
+            <span class="kpi-value__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" role="img" aria-hidden="true" focusable="false">
+                <use href="{{ '/assets/icons/team.svg#team' | relative_url }}"></use>
+              </svg>
+            </span>
+            <span class="kpi-value__number">5+</span>
+          </div>
+          <div class="kpi-value__label">Internal Teams</div>
+        </div>
+      </div>
+      <div class="kpi-tags">
+        <span>B2C</span><span>Analytics</span><span>Web</span><span>Data Platform</span><span>Data Export API</span>
+      </div>
     </div>
+  </div>
+  <div class="kpi-grid">
     <div class="kpi-card">
-      <div class="kpi-value">-28%</div>
-      <div class="kpi-label">Churn</div>
-      <p class="kpi-copy">Launched win-back sequences and relevance scoring to reduce drop-off.</p>
-    </div>
-    <div class="kpi-card">
-      <div class="kpi-value">+12 pts</div>
-      <div class="kpi-label">NPS</div>
-      <p class="kpi-copy">Shipped feedback loops, fast fixes, and in-app education for power features.</p>
+      <div class="kpi-brand">
+        <img class="kpi-brand__logo" src="{{ '/assets/icons/pg.svg' }}" alt="P&G logo">
+        <span class="kpi-brand__name">P&amp;G Supply Chain Solutions</span>
+      </div>
+      <div class="kpi-value-grid">
+        <div class="kpi-value-block">
+          <div class="kpi-value__top">
+            <span class="kpi-value__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" role="img" aria-hidden="true" focusable="false">
+                <use href="{{ '/assets/icons/dollar.svg#dollar' | relative_url }}"></use>
+              </svg>
+            </span>
+            <span class="kpi-value__number">$10+ Millions</span>
+          </div>
+          <div class="kpi-value__label">Cash Value</div>
+        </div>
+        <div class="kpi-value-block">
+          <div class="kpi-value__top">
+            <span class="kpi-value__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" role="img" aria-hidden="true" focusable="false">
+                <use href="{{ '/assets/icons/key.svg#key' | relative_url }}"></use>
+              </svg>
+            </span>
+            <span class="kpi-value__number">-30%</span>
+          </div>
+          <div class="kpi-value__label">Total Cost of Ownership</div>
+        </div>
+        <div class="kpi-value-block">
+          <div class="kpi-value__top">
+            <span class="kpi-value__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" role="img" aria-hidden="true" focusable="false">
+                <use href="{{ '/assets/icons/award.svg#award' | relative_url }}"></use>
+              </svg>
+            </span>
+            <span class="kpi-value__number">#1</span>
+          </div>
+          <div class="kpi-value__label">CTO Best Technical Team (Global)</div>
+        </div>
+      </div>
+      <div class="kpi-tags">
+        <span>B2B</span><span>Supply Chain Analytics</span><span>Data Lake</span>
+      </div>
     </div>
   </div>
 </section>
@@ -163,12 +176,9 @@ layout: default
     <h2>Travelling</h2>
   </div>
   <div class="map-shell">
-    <iframe
-      class="map-frame map-frame--dark"
-      src="https://www.google.com/maps/d/embed?mid={{ site.google_custom_map_id | uri_escape }}&z=3"
-      allowfullscreen
-      loading="lazy"
-      referrerpolicy="no-referrer-when-downgrade">
+    <iframe class="map-frame map-frame--dark"
+      src="https://www.google.com/maps/d/embed?mid={{ site.google_custom_map_id | uri_escape }}&z=3" allowfullscreen
+      loading="lazy" referrerpolicy="no-referrer-when-downgrade">
     </iframe>
   </div>
 </section>
