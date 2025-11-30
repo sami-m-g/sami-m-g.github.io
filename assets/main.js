@@ -1,6 +1,31 @@
 'use strict';
 
 (() => {
+  const initResponsiveMapZoom = () => {
+    const map = document.querySelector('.map-frame[data-base-src]');
+    if (!map) return;
+
+    const base = map.dataset.baseSrc || '';
+    if (!base) return;
+
+    const desktopZoom = Number.parseInt(map.dataset.zoomDesktop || '3', 10);
+    const mobileZoom = Number.parseInt(map.dataset.zoomMobile || String(desktopZoom), 10);
+    const media = window.matchMedia('(max-width: 640px)');
+
+    const applyZoom = () => {
+      const zoom = media.matches ? mobileZoom : desktopZoom;
+      const connector = base.includes('?') ? '&' : '?';
+      const targetSrc = `${base}${connector}z=${zoom}`;
+
+      if (map.src !== targetSrc) {
+        map.src = targetSrc;
+      }
+    };
+
+    applyZoom();
+    media.addEventListener('change', applyZoom);
+  };
+
   const initTypewriter = () => {
     const rotator = document.getElementById('role-rotator');
     const cursor = document.querySelector('.typewriter__cursor');
@@ -127,5 +152,6 @@
   document.addEventListener('DOMContentLoaded', () => {
     initTypewriter();
     initKpiCounters();
+    initResponsiveMapZoom();
   });
 })();

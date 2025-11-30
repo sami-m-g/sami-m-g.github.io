@@ -177,7 +177,10 @@ layout: default
   </div>
   <div class="map-shell">
     <iframe class="map-frame map-frame--dark"
-      src="https://www.google.com/maps/d/embed?mid={{ site.google_custom_map_id | uri_escape }}&z=3" allowfullscreen
+      data-base-src="https://www.google.com/maps/d/embed?mid={{ site.google_custom_map_id | uri_escape }}"
+      data-zoom-desktop="3"
+      data-zoom-mobile="1"
+      allowfullscreen
       loading="lazy" referrerpolicy="no-referrer-when-downgrade">
     </iframe>
   </div>
